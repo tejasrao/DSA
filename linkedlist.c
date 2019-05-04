@@ -55,12 +55,7 @@ Node* deleteNode(Node* head, int val){
 			if(temp == NULL){
 				printf("%d Node not found\n", val);
 			}else{
-				if(temp->next == NULL){
-					prev->next = NULL;
-				}
-				else{
-					prev->next = temp->next;
-				}
+				prev->next = temp->next;
 				printf("%d Node deleted\n", val);
 			}
 		}
