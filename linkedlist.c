@@ -7,6 +7,7 @@ struct node{
 };
 
 typedef struct node Node;
+int len = 0;
 
 Node* createNode(int val){
 	Node *temp;
@@ -21,7 +22,7 @@ Node* createNode(int val){
 	return temp;
 }
 
-Node* insertNode(Node* head, int val){
+Node* insertNode(Node* head,  int val){
 	Node* newNode = createNode(val);
 	if(head == NULL){
 		head = newNode;
@@ -33,6 +34,7 @@ Node* insertNode(Node* head, int val){
 		}
 		temp->next = newNode;
 	}
+	len++;
 	return head;
 }
 
@@ -76,11 +78,44 @@ void printNodes(Node* head){
 	printf("%d\n", temp->val);
 }
 
+Node* reverseLinkedList(Node* head){
+	if(head == NULL){
+		printf("Empty linked list\n");
+		return;
+	}
+	Node *start = NULL, *temp;
+	while(head != NULL){
+		temp = head;
+		head = head->next;
+		if(start == NULL){
+			start = temp;
+			start->next = NULL;
+		}
+		else{
+			temp->next = start;
+			start = temp;
+		}
+	}
+	/*
+		while(current != NULL){
+			next = current->next;
+			current->next = prev;
+			prev = current;
+			current = next;
+		}
+	*/
+	return temp;
+}
+
 int main(void){
 	Node* head = createNode(12);
 	head = insertNode(head, 11);
 	head = insertNode(head, 13);
 	head = insertNode(head, 14);
+	head = insertNode(head, 123);
+	head = insertNode(head, 67);
+	printNodes(head);
+	/*
 	Node* t = insertNode(NULL, 1);
 	printNodes(head);
 	head = deleteNode(head, 12);
@@ -92,6 +127,8 @@ int main(void){
 	head = deleteNode(head, 145);
 	printNodes(head);
 	head = deleteNode(head, 11);
+	*/
+	head = reverseLinkedList(head);
 	printNodes(head);
 	return 0;
 }
